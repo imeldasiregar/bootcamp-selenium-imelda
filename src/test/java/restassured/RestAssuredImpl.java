@@ -136,14 +136,17 @@ public class RestAssuredImpl {
         RestAssured.baseURI = "https://whitesmokehouse.com";
         // Create Update Employee request
         String bodyUpdate = "{\n" +
-                    "    \"year\": \"2019\",\n" +
-                    "    \"price\": 1849.99,\n" +
-                    "    \"cpu_model\": \"Intel Core i9\",\n" +
-                    "    \"hard_disk_size\": \"1 TB\",\n" +
-                    "    \"capacity\": \"2 cpu\",\n" +
-                    "    \"screen_size\": \"14 Inch\",\n" +
-                    "    \"color\": \"red\",\n" +
-                    "}";
+                "  \"name\": \"Apple MacBook Pro 16\",\n" +
+                "  \"data\": {\n" +
+                "    \"year\": 2019,\n" +
+                "    \"price\": 1849.99,\n" +
+                "    \"cpu_model\": \"Intel Core i9\",\n" +
+                "    \"hard_disk_size\": \"1 TB\",\n" +
+                "    \"capacity\": \"2 cpu\",\n" +
+                "    \"screen_size\": \"14 Inch\",\n" +
+                "    \"color\": \"red\"\n" +
+                "  }\n" +
+                "}";
                          
         // Send POST request to Object endpoint
         Response response = RestAssured.given()
@@ -210,6 +213,7 @@ public class RestAssuredImpl {
         Response response = RestAssured.given()
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + token)
+                .body(bodyUpdate)
                 .log().all()
                 .when()
                 .patch("/webhook/39a0f904-b0f2-4428-80a3-391cea5d7d04/api/object/12");
@@ -217,26 +221,4 @@ public class RestAssuredImpl {
         System.out.println("Response: " + response.asPrettyString());
     }
 
-    // @Test
-    // public void getObjectInvalidToken(){
-    //     /*
-    //      * Define the base URL for the API
-    //      * String baseUrl = "https://whitesmokehouse.com";
-    //      */
-    //     RestAssured.baseURI = "https://whitesmokehouse.com";
-    //     // Create Get Object request
-    //     // Send GET request to employee endpoint
-    //     Response response = RestAssured.given()
-    //             .header("Content-Type", "application/json")
-    //             .header("Authorization", "Bearer " + token + "invalid")
-    //             .log().all()
-    //             .when()
-    //             .get("/webhook/api/get");
-    //     // Print the response
-    //     System.out.println("Response: " + response.asPrettyString());
-
-    //     // Validate the response
-    //     assert response.getStatusCode() == 403 : "Expected status code 403 but got " + response.getStatusCode();
-        
-    // }
 }
